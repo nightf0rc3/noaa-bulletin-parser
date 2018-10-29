@@ -1,9 +1,4 @@
 
-// import * as fs from 'fs';
-
-
-
-
 export const parseBulletin = (rawBltn: string) => {
     const NAME_RGX = /A.\s{2}(.*(\((.*)\)))/;
     const DATE_RGX = /B.\s{2}((\d{2})\/(\d{2})(\d{2})Z)/;

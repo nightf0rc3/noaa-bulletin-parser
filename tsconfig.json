@@ -8,19 +8,20 @@
     "importHelpers": true,
     "alwaysStrict": true,
     "sourceMap": true,
+    "preserveConstEnums": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
     "strictNullChecks": false,
     "declaration": true,
-    "skipLibCheck": true
+    "outDir": "dist",
+    "removeComments": true
   },
   "include": [
-    "src/**/*",
-    "__tests__/**/*"
+    "src/**/*"
   ]
 }
