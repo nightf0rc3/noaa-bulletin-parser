@@ -1,6 +1,6 @@
 {
   "name": "noaa-bulletin-parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Parses Tropical Storms from NOAA SSD Bulletins",
   "main": "dist/index.js",
   "scripts": {
