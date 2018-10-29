@@ -2,39 +2,43 @@
 export const parseBulletin = (rawBltn: string) => {
     const NAME_RGX = /A.\s{2}(.*(\((.*)\)))/;
     const DATE_RGX = /B.\s{2}((\d{2})\/(\d{2})(\d{2})Z)/;
-    const LAT_RGX = /C.\s{2}(\d.*)(\w)/;
-    const LON_RGX = /D.\s{2}(\d.*)(\w)/;
+    const LAT_RGX = /C.\s{2}(\d{1,3}\.\d\w)/;
+    const LON_RGX = /D.\s{2}(\d{1,3}\.\d\w)/;
     const E_RGX = /E.\s{2}(\S*\/(.*))/;
     const DVORAK_RGX = /F.\s\s(T|ST)(\d\.\d)\/(\d\.\d)\/(D|W|S)(\d\.\d)\/(\d\d)HRS/;
     const G_RGX = /G.\s{2}(.*)/;
     const TEXT_RGX = /H.\s{2}REMARKS...(.*(\n.*)*)I\./;
     // const I_RGX = /I.\s{2}(.*)/;
-    const dvorak = DVORAK_RGX.exec(rawBltn);
-    const date = DATE_RGX.exec(rawBltn);
-    return {
-        name: NAME_RGX.exec(rawBltn)[3],
-        fullTag: NAME_RGX.exec(rawBltn)[1],
-        date: {
-            day: date[2],
-            hour: date[3],
-            minute: date[4]
-        },
-        lat: LAT_RGX.exec(rawBltn)[1],
-        lng: LON_RGX.exec(rawBltn)[1],
-        details: {
-            tropical: dvorak[1],
-            satelliteT: convertDvorakT2Details(dvorak[2]),
-            currentT: convertDvorakT2Details(dvorak[3]),
-            change: {
-                status: dvorak[4],
-                amount: dvorak[5],
-                time: dvorak[6]
-            }
-        },
-        satellite: E_RGX.exec(rawBltn)[2],
-        g: G_RGX.exec(rawBltn)[1],
-        text: TEXT_RGX.exec(rawBltn)[1],
-        // other: I_RGX.exec(rawBltn)[1],
+    try {
+        const dvorak = DVORAK_RGX.exec(rawBltn);
+        const date = DATE_RGX.exec(rawBltn);
+        return {
+            name: NAME_RGX.exec(rawBltn)[3],
+            fullTag: NAME_RGX.exec(rawBltn)[1],
+            date: {
+                day: date[2],
+                hour: date[3],
+                minute: date[4]
+            },
+            lat: LAT_RGX.exec(rawBltn)[1],
+            lng: LON_RGX.exec(rawBltn)[1],
+            details: {
+                tropical: dvorak[1],
+                satelliteT: convertDvorakT2Details(dvorak[2]),
+                currentT: convertDvorakT2Details(dvorak[3]),
+                change: {
+                    status: dvorak[4],
+                    amount: dvorak[5],
+                    time: dvorak[6]
+                }
+            },
+            satellite: E_RGX.exec(rawBltn)[2],
+            g: G_RGX.exec(rawBltn)[1],
+            text: TEXT_RGX.exec(rawBltn)[1],
+            // other: I_RGX.exec(rawBltn)[1],
+        }
+    } catch (err) {
+        throw err;
     }
 
 };
