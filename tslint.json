@@ -18,7 +18,7 @@
     "no-console": false,
     "no-suspicious-comment": false,
     "ter-indent": false,
-    "max-line-length": [true, 120],
+    "max-line-length": [true, 140],
     "object-shorthand-properties-first": false,
     "typedef": [
       true,
