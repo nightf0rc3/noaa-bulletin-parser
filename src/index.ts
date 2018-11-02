@@ -5,18 +5,19 @@ export const parseBulletin = (rawBltn: string) => {
     const LAT_RGX = /C.\s{2}(\d{1,3}\.\d\w)/;
     const LON_RGX = /D.\s{2}(\d{1,3}\.\d\w)/;
     const E_RGX = /E.\s{2}(\S*\/(.*))/;
-    const DVORAK_RGX = /F.\s\s((T|ST)(\d\.\d)\/(\d\.\d)\/(D|W|S)(\d\.\d)\/(\d\d)HRS)|(OVERLAND)/;
+    const DVORAK_RGX = /F.\s\s((T|ST)(\d\.\d)\/(\d\.\d)\/(D|W|S)(\d\.\d)\/(\d\d)HRS)|(OVERLAND)|(TOO WEAK)/;
     const G_RGX = /G.\s{2}(.*)/;
     const TEXT_RGX = /H.\s{2}REMARKS...(.*(\n.*)*)I\./;
     // const I_RGX = /I.\s{2}(.*)/;
-    const values = {
-        t: 'OVERLAND',
-        maxWinds: 0,
-        category: 'Overland',
-    };
     try {
         const dvorak = DVORAK_RGX.exec(rawBltn);
         const date = DATE_RGX.exec(rawBltn);
+        const other = (dvorak[8] === undefined) ? dvorak[9] : dvorak[8];
+        const values = {
+            t: other,
+            maxWinds: 0,
+            category: other,
+        };
         return {
             name: NAME_RGX.exec(rawBltn)[3],
             fullTag: NAME_RGX.exec(rawBltn)[1],
@@ -28,7 +29,7 @@ export const parseBulletin = (rawBltn: string) => {
             lat: LAT_RGX.exec(rawBltn)[1],
             lng: LON_RGX.exec(rawBltn)[1],
             details: {
-                tropical: (dvorak[1] === undefined) ? dvorak[8] : dvorak[2],
+                tropical: (dvorak[1] === undefined) ? other : dvorak[2],
                 satelliteT: (dvorak[1] !== undefined) ? convertDvorakT2Details(dvorak[3]) : values,
                 currentT: (dvorak[1] !== undefined) ? convertDvorakT2Details(dvorak[4]) : values,
                 change: {

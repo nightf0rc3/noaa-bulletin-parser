@@ -34,8 +34,8 @@ describe('bulletin-parser test', () => {
             lng: '120.6E',
             details: {
                 tropical: 'OVERLAND',
-                satelliteT: { t: 'OVERLAND', maxWinds: 0, category: 'Overland' },
-                currentT: { t: 'OVERLAND', maxWinds: 0, category: 'Overland' },
+                satelliteT: { t: 'OVERLAND', maxWinds: 0, category: 'OVERLAND' },
+                currentT: { t: 'OVERLAND', maxWinds: 0, category: 'OVERLAND' },
                 change: { status: 'O', amount: '0.0', time: '24' }
             },
             satellite: 'HIMAWARI-8',
