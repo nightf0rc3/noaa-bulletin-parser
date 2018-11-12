@@ -1,5 +1,6 @@
 
 export const parseBulletin = (rawBltn: string) => {
+    const UID_RGX = /(T\S{5}) KNES (\d{6})/;
     const NAME_RGX = /A.\s{2}(.*(\((.*)\)))/;
     const DATE_RGX = /B.\s{2}((\d{2})\/(\d{2})(\d{2})Z)/;
     const LAT_RGX = /C.\s{2}(\d{1,3}\.\d\w)/;
@@ -11,6 +12,7 @@ export const parseBulletin = (rawBltn: string) => {
     // const I_RGX = /I.\s{2}(.*)/;
     try {
         const dvorak = DVORAK_RGX.exec(rawBltn);
+        const ident = UID_RGX.exec(rawBltn);
         const date = DATE_RGX.exec(rawBltn);
         const other = (dvorak[8] === undefined) ? dvorak[9] : dvorak[8];
         const values = {
@@ -21,6 +23,8 @@ export const parseBulletin = (rawBltn: string) => {
         return {
             name: NAME_RGX.exec(rawBltn)[3],
             fullTag: NAME_RGX.exec(rawBltn)[1],
+            stormId: ident[1],
+            bltnInc: ident[2],
             date: {
                 day: date[2],
                 hour: date[3],

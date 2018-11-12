@@ -7,6 +7,8 @@ describe('bulletin-parser test', () => {
         const xpctObj = {
             name: '95L',
             fullTag: 'TROPICAL DISTURBANCE (95L)',
+            stormId: 'TXNT24',
+            bltnInc: '261208',
             date: { day: '26', hour: '11', minute: '45' },
             lat: '24.7N',
             lng: '45.1W',
@@ -29,6 +31,8 @@ describe('bulletin-parser test', () => {
         const xpctObj = {
             name: 'YUTU',
             fullTag: '31W (YUTU)',
+            stormId: 'TXPQ27',
+            bltnInc: '300307',
             date: { day: '30', hour: '02', minute: '30' },
             lat: '16.7N',
             lng: '120.6E',

@@ -23,7 +23,6 @@ describe('NOAA Recent bulletins', () => {
             const result = await axios.get(bltn);
             try {
                 const data = parseBulletin(result.data);
-                console.log(data.details.tropical);
             } catch (err) {
                 console.log(bltn);
                 console.log(err);
